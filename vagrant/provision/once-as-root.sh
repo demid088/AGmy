@@ -36,7 +36,7 @@ apt-get install -y php7.3-curl php7.3-cli php7.3-intl php7.3-mysql php7.3-gd php
 
 info "Configure MySQL"
 sed -i "s/.*bind-address.*/bind-address = 0.0.0.0/" /etc/mysql/mariadb.conf.d/50-server.cnf
-mysql -uroot <<< "CREATE SCHEMA autogigant"
+mysql -uroot <<< "CREATE SCHEMA autogigant CHARACTER SET utf8 COLLATE utf8_bin"
 mysql -uroot <<< "CREATE USER 'root'@'%' IDENTIFIED BY ''"
 mysql -uroot <<< "GRANT ALL PRIVILEGES ON *.* TO 'root'@'%'"
 mysql -uroot <<< "DROP USER 'root'@'localhost'"
