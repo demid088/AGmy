@@ -43,7 +43,7 @@ class Users extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'users';
+        return '{{%users}}';
     }
 
     /**
@@ -89,6 +89,27 @@ class Users extends \yii\db\ActiveRecord
             'id_city' => 'Id City',
         ];
     }
+
+    /**
+     * @inheritdoc
+     */
+    public static function findIdentity($id)
+    {
+        return static::findOne(['id' => $id]);
+    }
+
+    /**
+     * Finds user by username
+     *
+     * @param string $username
+     * @return static|null
+     */
+    public static function findByUsername($username)
+    {
+        return static::findOne(['username' => $username]);
+    }
+
+    //=========================================================
 
     /**
      * @return \yii\db\ActiveQuery
