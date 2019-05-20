@@ -9,6 +9,7 @@ use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use app\models\Users;
 
 class SiteController extends Controller
 {
@@ -119,5 +120,21 @@ class SiteController extends Controller
     public function actionAbout()
     {
         return $this->render('about');
+    }
+
+    public function actionTest()
+    {
+        $model = Users::find()->where(['username' => 'admin'])->one();
+
+        if (empty($model)) {
+            $user = new Users();
+            $user->username = 'admin';
+            $user->email = 'admin@ag.ru';
+            $user->setPassword('admin');
+            $user->generateAuthKey();
+            if ($user->save()) {
+                echo 'User Save Good !';
+            }
+        }
     }
 }
